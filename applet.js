@@ -10,7 +10,12 @@ const ClipboardTracker =
   imports.ui.appletManager.applets[UUID].clipboard.clipboardTracker;
 
 const Main = imports.ui.main;
-const HOT_KEY_NAME = "clipboard-history-toggle-menu";
+const HOT_KEY_NAME_SUPER_V = "clipboard-history-toggle-menu-super-v";
+const HOT_KEY_NAME_CTRL_ALT_V = "clipboard-history-toggle-menu-ctrl-alt-v";
+const HOT_KEYS = {
+  [HOT_KEY_NAME_SUPER_V]: "<Super>v",
+  [HOT_KEY_NAME_CTRL_ALT_V]: "<Ctrl><Alt>V",
+};
 
 class ClipboardHistoryApplet extends Applet.Applet {
   constructor(metadata, orientation, panelHeight, instanceId) {
@@ -45,14 +50,11 @@ class ClipboardHistoryApplet extends Applet.Applet {
   }
 
   _registerShortcut() {
-    Main.keybindingManager.addHotKey(HOT_KEY_NAME, "<Super>V", () => {
-      this.historyMenu.referesh();
-      this.historyMenu.toggle();
-    });
-
-    Main.keybindingManager.addHotKey(HOT_KEY_NAME, "<Ctrl><Alt>V", () => {
-      this.historyMenu.referesh();
-      this.historyMenu.toggle();
+    Object.keys(HOT_KEYS).forEach((hotkey) => {
+      Main.keybindingManager.addHotKey(hotkey, HOT_KEYS[hotkey], () => {
+        this.historyMenu.referesh();
+        this.historyMenu.toggle();
+      });
     });
   }
 
@@ -75,7 +77,8 @@ class ClipboardHistoryApplet extends Applet.Applet {
       this.historyMenu.destroy();
     }
 
-    Main.keybindingManager.removeHotKey(HOT_KEY_NAME);
+    Main.keybindingManager.removeHotKey(HOT_KEY_NAME_SUPER_V);
+    Main.keybindingManager.removeHotKey(HOT_KEY_NAME_CTRL_ALT_V);
   }
 }
 
