@@ -45,7 +45,12 @@ class ClipboardHistoryApplet extends Applet.Applet {
   }
 
   _registerShortcut() {
-    Main.keybindingManager.addHotKey(HOT_KEY_NAME, "<Super>v", () => {
+    Main.keybindingManager.addHotKey(HOT_KEY_NAME, "<Super>V", () => {
+      this.historyMenu.referesh();
+      this.historyMenu.toggle();
+    });
+
+    Main.keybindingManager.addHotKey(HOT_KEY_NAME, "<Ctrl><Alt>V", () => {
       this.historyMenu.referesh();
       this.historyMenu.toggle();
     });
