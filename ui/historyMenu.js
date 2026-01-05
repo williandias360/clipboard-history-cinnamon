@@ -5,10 +5,12 @@ const Main = imports.ui.main;
 class HistoryMenu {
   constructor(applet) {
     this.applet = applet;
-    this.menuManager = new PopupMenu.PopupMenuManager(applet);
+    this.history = [];
 
     this.menu = new PopupMenu.PopupMenu(applet.actor, 0.0, St.Side.TOP);
+    this.menuManager = new PopupMenu.PopupMenuManager(applet);
     this.menuManager.addMenu(this.menu);
+
     Main.uiGroup.add_actor(this.menu.actor);
     this.menu.actor.hide();
 
@@ -32,7 +34,7 @@ class HistoryMenu {
       items = this.menu._getMenuItems();
     }
 
-    if (this.applet.history.length === 0) {
+    if (this.history.length === 0) {
       this.menu.addMenuItem(
         new PopupMenu.PopupMenuItem("Nenhum item no histórico", {
           reactive: false,
@@ -42,7 +44,7 @@ class HistoryMenu {
       return;
     }
 
-    this.applet.history.forEach((text, index) => {
+    this.history.forEach((text, index) => {
       let preview = text.replace(/\n/g, " ");
       if (preview.length > 50) {
         preview = preview.substring(0, 50) + "...";

@@ -29,8 +29,6 @@ class ClipboardHistoryApplet extends Applet.Applet {
     this.actor.add_child(this.label);
     this.set_applet_tooltip("Clipboard History");
 
-    this.history = [];
-
     this.clipboardTracker = new ClipboardTracker.ClipboardTrackerExport(
       (text) => this._onClipboardChanged(text)
     );
@@ -40,10 +38,15 @@ class ClipboardHistoryApplet extends Applet.Applet {
   }
 
   _onClipboardChanged(text) {
-    this.history.unshift(text);
+    if (!text || text.trim() === "") return;
 
-    if (this.history.length > 10) {
-      this.history.pop();
+    this.historyMenu.history = this.historyMenu.history.filter(
+      (item) => item !== text
+    );
+    this.historyMenu.history.unshift(text);
+
+    if (this.historyMenu.history.length > 10) {
+      this.historyMenu.history.pop();
     }
 
     global.log(`[ClipboardHistory] Copied: ${text.substring(0, 50)}`);
