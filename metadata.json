@@ -1,0 +1,7 @@
+{
+  "uuid": "clipboard-history@willian",
+  "name": "Clipboard History",
+  "description": "Clipboard history manager similar to Windows Win+V",
+  "version": "0.1.0",
+  "cinnamon-version": ["5.4", "5.6", "6.0"]
+}
