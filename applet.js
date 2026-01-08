@@ -78,11 +78,14 @@ class ClipboardHistoryApplet extends Applet.Applet {
   }
 
   _openMenuAtPointer() {
-    let [x, y] = global.get_pointer();
+    this.historyMenu.menu.close();
 
     if (this._pointerActor) {
       this._pointerActor.destroy();
+      this._pointerActor = null;
     }
+
+    let [x, y] = global.get_pointer();
 
     this._pointerActor = new Clutter.Actor({
       x,
@@ -122,8 +125,21 @@ class ClipboardHistoryApplet extends Applet.Applet {
   }
 
   on_applet_clicked() {
-    this.historyMenu.referesh();
-    this.historyMenu.open();
+    try {
+      this.historyMenu.menu.close();
+
+      if (this._pointerActor) {
+        this._pointerActor.destroy();
+        this._pointerActor = null;
+      }
+
+      this.historyMenu.menu.sourceActor = this.actor;
+
+      this.historyMenu.referesh();
+      this.historyMenu.open();
+    } catch (e) {
+      global.logError(e);
+    }
   }
 
   on_applet_removed_from_panel() {
