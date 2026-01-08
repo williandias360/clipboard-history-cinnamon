@@ -1,0 +1,34 @@
+/* Container do menu */
+.popup-menu-content {
+  padding: 6px;
+  max-width: 120px;
+}
+
+/* Cada item */
+.popup-menu-item {
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin: 2px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.popup-menu-item:last-child {
+  border-bottom: none;  
+}
+
+/*Texto */
+.popup-menu-item-label {
+  font-size: 10.5pt;
+  color: #eaeaea;
+}
+
+/* Hover e foco por teclado*/
+.popup-menu-item:hover,
+.popup-menu-item:focus {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Item ativo (Enter) */
+.popup-menu-item:active {
+  background-color: rgba(255, 255, 255, 0.12);
+}

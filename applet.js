@@ -74,6 +74,8 @@ class ClipboardHistoryApplet extends Applet.Applet {
       this.historyMenu.history.pop();
     }
 
+    this.historyMenu.saveHistory();
+
     global.log(`[ClipboardHistory] Copied: ${text.substring(0, 50)}`);
   }
 
