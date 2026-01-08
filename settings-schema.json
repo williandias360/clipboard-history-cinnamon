@@ -1,0 +1,22 @@
+{
+  "maxItems": {
+    "type": "spinbutton",
+    "default": 20,
+    "min": 5,
+    "max": 100,
+    "step": 1,
+    "description": "Quantidade máxima de itens no histórico"
+  },
+
+  "avoidDuplicates": {
+    "type": "switch",
+    "default": true,
+    "description": "Evitar itens duplicados"
+  },
+
+  "showOnShortcut": {
+    "type": "switch",
+    "default": true,
+    "description": "Abrir popup ao usar o atalho"
+  }
+}
